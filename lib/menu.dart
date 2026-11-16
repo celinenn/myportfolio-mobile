@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myportfolio_mobile/educations_page.dart';
+import 'package:myportfolio_mobile/experiences_page.dart';
+import 'package:myportfolio_mobile/projects_page.dart';
+import 'package:myportfolio_mobile/skills_page.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -8,12 +12,15 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP D";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("See Projects", Icons.folder),
-    ItemHomepage("Add Project", Icons.add_circle),
+    ItemHomepage("Educations", Icons.school),
+    ItemHomepage("Experiences", Icons.work_history),
+    ItemHomepage("Projects", Icons.folder),
+    ItemHomepage("Skills", Icons.psychology),
+    ItemHomepage("Add Item", Icons.add_circle),
     ItemHomepage("Logout", Icons.logout),
   ];
 
-    @override
+  @override
   Widget build(BuildContext context) {
     // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
     return Scaffold(
@@ -21,10 +28,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -134,12 +138,29 @@ class ItemCard extends StatelessWidget {
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
         onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
+          // Show SnackBar feedback
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("YOu have clicked the ${item.name} button!"))
+              SnackBar(
+                content: Text("You have clicked the ${item.name} button!"),
+              ),
             );
+
+          // TODO: Nacigate to the pages
+          if (item.name == "Educations") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const EducationsPage()));
+          } else if (item.name == "Experiences") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ExperiencesPage()));
+          } else if (item.name == "Projects") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ProjectsPage()));
+          } else if (item.name == "Skills") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const SkillsPage()));
+          } else if (item.name == "Add Item") {
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => const ItemFormPage()));
+          } else if (item.name == "Logout") {
+            // logout
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -147,11 +168,7 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
