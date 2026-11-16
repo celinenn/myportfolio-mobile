@@ -63,3 +63,31 @@ Proses saya mengerjakan Tugas ini:
 4. Kemudian, saya mengimpelemtasikan background color pada setiap button section pada menu.dart dan juga mengimplementasikan SnackBar button.
 
 5. Kemudian, saya selesaikan pengerjaan Tugas 7 dengan mengisi README.md ini.
+
+
+
+### Tugas 8
+
+1. Navigator.push() menambahkan rute halaman baru ke atas navigation stack (tumpukan halaman), Navigator.pushReplacement() mengganti rute halaman saat ini dengan rute halaman baru di dalam stack, sedangkan Navigator.pop() menghapus halaman saat ini dari puncak tumpukan (stack), yang berfungsi untuk menutup halaman atau dialog saat ini dan kembali ke halaman sebelumnya. Saya menggunakan Navigator.push() dalam membuka form dari kartu aksi agar saat pengguna menekan tombol "Add Item" dari kartu menu utama, mereka dapat dengan mudah kembali ke halaman utama menggunakan tombol back. Sedangkan, opsi Home di dalam drawer menggunakan Navigator.pushReplacement() (atau Navigator.push yang disesuaikan) untuk membawa pengguna kembali ke MyHomePage().
+
+2. Scaffold bertindak sebagai kerangka dasar visual Material Design yang menyediakan struktur standar untuk menyusun komponen utama seperti AppBar, body, dan drawer, AppBar menjaga konsistensi bagian atas setiap halaman dengan menampilkan judul, tombol kembali, atau ikon aksi secara seragam, sedangkan Drawer menyediakan menu navigasi samping yang konsisten di setiap halaman, memudahkan pengguna berpindah antar menu (Home, Projects, Educations, Experiences, Skills, dan Add Item) tanpa kehilangan arah. Saya menggunakan warna utama tema portofolio (seperti Theme.of(context).colorScheme.primary atau Colors.indigo) pada properti backgroundColor di AppBar baik pada MyHomePage maupun di ItemFormPage, agar semua tema warnanya tetap sama.
+
+3. Tata letak formulir dirancang secara vertikal menggunakan Column di dalam wadah Padding dan Form agar setiap elemen input (seperti dropdown kategori, teks judul, dan deskripsi) tersusun rapi dari atas ke bawah dan mudah dibaca oleh pengguna. SizedBox berperan memberikan jarak spasi vertikal yang konsisten antar komponen input agar tampilan form tidak terlihat sesak atau bertumpuk. Selain itu, terdapat juga SingleChildScrollView yang memungkinkan seluruh isi form digulir ke atas dan ke bawah sehingga tidak terjadi error bottom overflow.
+
+4. GlobalKey<'FormState>: Berfungsi sebagai pengenal unik (identifier) yang memegang kendali atas status formulir (FormState), memungkinkan kita mengakses dan memvalidasi seluruh elemen input di dalamnya secara kolektif. validator() merupakan fungsi pengujian yang disematkan pada setiap TextFormField untuk memeriksa apakah nilai yang dimasukkan pengguna memenuhi aturan tertentu (misalnya tidak boleh kosong). validate() merupakan metode yang dipanggil pada _formKey.currentState!.validate() untuk menjalankan seluruh fungsi validator() di dalam form secara serentak. Salah satu contoh input form yang ditolak adalah nilai string kosong ("") pada kolom Title atau Description akan ditolak oleh validasi, memunculkan pesan error di bawah kolom input, dan mencegah data dikirim.... Mengapa Jenis Input / Papan Ketik Saja Belum Cukup? Mengatur tipe papan ketik (seperti TextInputType.number atau emailAddress) hanya membantu user experience saat mengetik, namun tidak dapat mencegah pengguna mengirimkan data kosong (null / ""), data yang tidak lengkap, atau format yang tidak sesuai aturan bisnis aplikasi. Oleh karena itu, logika validasi secara pemrograman melalui validator() tetap mutlak diperlukan untuk menjamin integritas data.
+
+
+#### Pernyataan Penggunaan AI
+
+Saya menggunakan bantuan AI dalam pengerjaan Tugas 8 ini, lebih tepatnya, saya menggunakan AI Claude untuk membantu dalam pembenaran error (yang saya sudah mencoba benarkan dengan sendiri namun gagal mulu) dan untuk refactoring
+
+Proses saya mengerjakan Tugas ini:
+
+1. Saya memulai pengerjaan Tugas 8 ini dengan mengikuti langkah-langkah pada Tutorial 9.
+
+2. Kemudian, saat saya mendapatkan error, saya mencoba untuk membenarkan error tersebut dengan troubleshooting pada terminal (mencari tahu alasan error melalui terminal). Namun, saat saya sudah troubleshooting selama ++30 menit, saya mulai bertanya-tanya ke Calude untuk meminta bantuan mencari root masalahnya.
+
+4. Kemudian, saat saya perlu refactoring, saya juga meminta bantuan pada Claud untuk membuat plan refactor (apa saja yang perlu di-refactor), etc.
+[LINK CHAT](https://claude.ai/share/000ea53c-95a2-48e1-b52b-c2793fc60072)
+
+5. Kemudian, saya selesaikan pengerjaan Tugas 8 dengan mengisi README.md ini.
