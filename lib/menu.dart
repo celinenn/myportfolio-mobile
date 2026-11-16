@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:myportfolio_mobile/widgets/left_drawer.dart';
 import 'package:myportfolio_mobile/educations_page.dart';
 import 'package:myportfolio_mobile/experiences_page.dart';
 import 'package:myportfolio_mobile/projects_page.dart';
 import 'package:myportfolio_mobile/skills_page.dart';
+import 'package:myportfolio_mobile/item_form.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -31,7 +33,9 @@ class MyHomePage extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      drawer: const LeftDrawer(),
       // Body halaman utama dengan padding di sekelilingnya.
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -57,7 +61,7 @@ class MyHomePage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 16.0),
                     child: Text(
-                      'Welcome to Mobile MyyPortfolio!',
+                      'Welcome to Mobile MyPortfolio!',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
@@ -146,15 +150,30 @@ class ItemCard extends StatelessWidget {
             );
 
           if (item.name == "Educations") {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const EducationsPage()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const EducationsPage()),
+            );
           } else if (item.name == "Experiences") {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const ExperiencesPage()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ExperiencesPage()),
+            );
           } else if (item.name == "Projects") {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const ProjectsPage()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProjectsPage()),
+            );
           } else if (item.name == "Skills") {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const SkillsPage()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SkillsPage()),
+            );
           } else if (item.name == "Add Item") {
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => const ItemFormPage()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ItemFormPage()),
+            );
           } else if (item.name == "Logout") {
             // logout
           }
