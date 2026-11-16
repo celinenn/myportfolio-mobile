@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio_mobile/menu.dart';
-import 'package:myportfolio_mobile/educations_page.dart';
-import 'package:myportfolio_mobile/experiences_page.dart';
-import 'package:myportfolio_mobile/projects_page.dart';
-import 'package:myportfolio_mobile/skills_page.dart';
-import 'package:myportfolio_mobile/item_form.dart';
+import 'package:myportfolio_mobile/screens/menu.dart';
+import 'package:myportfolio_mobile/screens/item_form.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -35,67 +31,21 @@ class LeftDrawer extends StatelessWidget {
               ],
             ),
           ),
-          // Home Route
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
+            // Navigasi ke halaman utama portofolio
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => MyHomePage()),
+                MaterialPageRoute(builder: (context) => const MyHomePage()),
               );
             },
           ),
-          // Educations Route
-          ListTile(
-            leading: const Icon(Icons.school_outlined),
-            title: const Text('Educations'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const EducationsPage()),
-              );
-            },
-          ),
-          // Experiences Route
-          ListTile(
-            leading: const Icon(Icons.work_history_outlined),
-            title: const Text('Experiences'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ExperiencesPage(),
-                ),
-              );
-            },
-          ),
-          // Projects Route
-          ListTile(
-            leading: const Icon(Icons.folder_outlined),
-            title: const Text('Projects'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const ProjectsPage()),
-              );
-            },
-          ),
-          // Skills Route
-          ListTile(
-            leading: const Icon(Icons.psychology_outlined),
-            title: const Text('Skills'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const SkillsPage()),
-              );
-            },
-          ),
-          // Add Project Form Route
           ListTile(
             leading: const Icon(Icons.add_circle_outline),
-            title: const Text('Add Item'),
+            title: const Text('Add Project'),
+            // Navigasi ke halaman tambah proyek
             onTap: () {
               Navigator.pushReplacement(
                 context,

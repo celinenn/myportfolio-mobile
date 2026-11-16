@@ -47,7 +47,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                   initialValue: _category,
                   decoration: InputDecoration(
                     labelText: 'Category',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   items: _categories.map((String category) {
                     return DropdownMenuItem(
@@ -66,8 +68,11 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 // Title Field (e.g., Project Name, Degree, Role, Skill Name)
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Title (e.g. WheelyMate, S.Kom, Software Engineer)',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    labelText:
+                        'Title (e.g. WheelyMate, S.Kom, Software Engineer)',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -87,7 +92,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Subtitle / Tech Stack / Institution',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -108,7 +115,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                   maxLines: 4,
                   decoration: InputDecoration(
                     labelText: 'Description / Details',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -137,28 +146,38 @@ class _ItemFormPageState extends State<ItemFormPage> {
                       if (_formKey.currentState!.validate()) {
                         showDialog(
                           context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Success!'),
-                            content: Text(
-                              'Successfully added "$_title" to $_category!',
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  _formKey.currentState!.reset();
-                                  setState(() {
-                                    _category = 'Projects'; // Reset default
-                                  });
-                                },
-                                child: const Text('OK'),
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Item successfully added!'),
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Title: $_title'),
+                                    Text('Category: $_category'),
+                                    Text('Subtitle/Tech: $_subtitleOrTech'),
+                                    Text('Description: $_description'),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
+                              actions: [
+                                TextButton(
+                                  child: const Text('OK'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    _formKey.currentState!.reset();
+                                    setState(() {
+                                      _category = 'Projects'; // Reset default
+                                    });
+                                  },
+                                ),
+                              ],
+                            );
+                          },
                         );
                       }
                     },
-                    child: const Text('Save Item', style: TextStyle(fontSize: 16)),
+                    child: const Text('Save', style: TextStyle(fontSize: 16)),
                   ),
                 ),
               ],
