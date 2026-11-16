@@ -12,12 +12,12 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP D";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Educations", Icons.school),
-    ItemHomepage("Experiences", Icons.work_history),
-    ItemHomepage("Projects", Icons.folder),
-    ItemHomepage("Skills", Icons.psychology),
-    ItemHomepage("Add Item", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
+    ItemHomepage("Educations", Icons.school, Colors.blue),
+    ItemHomepage("Experiences", Icons.work_history, Colors.teal),
+    ItemHomepage("Projects", Icons.folder, Colors.indigo),
+    ItemHomepage("Skills", Icons.psychology, Colors.deepOrange),
+    ItemHomepage("Add Item", Icons.add_circle, Colors.green),
+    ItemHomepage("Logout", Icons.logout, Colors.red),
   ];
 
   @override
@@ -120,8 +120,9 @@ class InfoCard extends StatelessWidget {
 class ItemHomepage {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ItemHomepage(this.name, this.icon);
+  ItemHomepage(this.name, this.icon, this.color);
 }
 
 class ItemCard extends StatelessWidget {
@@ -132,22 +133,18 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
+      color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        // Aksi ketika kartu ditekan oleh pengguna.
         onTap: () {
-          // Show SnackBar feedback
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text("You have clicked the ${item.name} button!"),
+                content: Text("Kamu telah menekan tombol ${item.name}!"),
               ),
             );
 
-          // TODO: Nacigate to the pages
           if (item.name == "Educations") {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const EducationsPage()));
           } else if (item.name == "Experiences") {
