@@ -14,10 +14,7 @@ class SectionPage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: children,
-      ),
+      body: ListView(padding: const EdgeInsets.all(16.0), children: children),
     );
   }
 }

@@ -12,8 +12,7 @@ class ProjectsPage extends StatelessWidget {
       children: [
         SectionCard(
           title: 'WheelyMate (Assistive Wheelchair)',
-          subtitle:
-              'Multi-sensor assistive wheelchair system using ESP32, environmental sensors, and servo canopy.',
+          subtitle: 'Multi-sensor assistive wheelchair system using ESP32, environmental sensors, and servo canopy.',
         ),
         // Add more
       ],
