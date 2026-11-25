@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio_mobile/screens/menu.dart';
-import 'package:myportfolio_mobile/screens/item_form.dart';
-import 'package:myportfolio_mobile/screens/projects_page.dart';
 import 'package:myportfolio_mobile/screens/educations_page.dart';
 import 'package:myportfolio_mobile/screens/experiences_page.dart';
+import 'package:myportfolio_mobile/screens/item_form.dart';
+import 'package:myportfolio_mobile/screens/menu.dart';
+import 'package:myportfolio_mobile/screens/projects_page.dart';
 import 'package:myportfolio_mobile/screens/skills_page.dart';
+import 'package:myportfolio_mobile/services/auth_state.dart';
+import 'package:myportfolio_mobile/widgets/auth_guard.dart'; // adjust if ensureLoggedIn lives elsewhere
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
@@ -18,30 +21,56 @@ class ItemCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          Widget? page;
+        onTap: () async {
           switch (item.name) {
             case 'Projects':
-              page = const ProjectsPage();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProjectsPage()),
+              );
               break;
             case 'Educations':
-              page = const EducationsPage();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EducationsPage()),
+              );
               break;
             case 'Experiences':
-              page = const ExperiencesPage();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ExperiencesPage(),
+                ),
+              );
               break;
             case 'Skills':
-              page = const SkillsPage();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SkillsPage()),
+              );
               break;
             case 'Add Item':
-              page = const ItemFormPage();
+              final ok = await ensureLoggedIn(context);
+              if (!ok || !context.mounted) return;
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ItemFormPage()),
+              );
               break;
-          }
-          if (page != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => page!),
-            );
+            case 'Logout':
+              final authState = context.read<AuthState>();
+              if (!authState.isLoggedIn) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('You are not logged in.')),
+                );
+                return;
+              }
+              await authState.logout();
+              if (!context.mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Logged out successfully.')),
+              );
+              break;
           }
         },
         child: Center(

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio_mobile/screens/menu.dart';
 import 'package:myportfolio_mobile/screens/item_form.dart';
+import 'package:myportfolio_mobile/screens/login_screen.dart';
+import 'package:myportfolio_mobile/screens/menu.dart';
+import 'package:myportfolio_mobile/services/auth_state.dart';
+import 'package:myportfolio_mobile/widgets/auth_guard.dart'; // adjust if ensureLoggedIn lives elsewhere
+import 'package:provider/provider.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isLoggedIn = context.watch<AuthState>().isLoggedIn;
+
     return Drawer(
       child: ListView(
         children: [
@@ -34,7 +40,6 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
-            // Navigasi ke halaman utama portofolio
             onTap: () {
               Navigator.pushReplacement(
                 context,
@@ -45,14 +50,45 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.add_circle_outline),
             title: const Text('Add Project'),
-            // Navigasi ke halaman tambah proyek
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
+            onTap: () async {
+              final navigator = Navigator.of(context);
+              final ok = await ensureLoggedIn(context);
+              if (!ok || !context.mounted) return;
+
+              navigator.pop();
+              navigator.pushReplacement(
                 MaterialPageRoute(builder: (context) => const ItemFormPage()),
               );
             },
           ),
+          const Divider(),
+          if (!isLoggedIn)
+            ListTile(
+              leading: const Icon(Icons.login),
+              title: const Text('Login'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push<bool>(
+                  context,
+                  MaterialPageRoute<bool>(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
+            )
+          else
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () async {
+                final messenger = ScaffoldMessenger.of(context);
+                Navigator.pop(context);
+                await context.read<AuthState>().logout();
+                messenger.showSnackBar(
+                  const SnackBar(content: Text('Logged out successfully.')),
+                );
+              },
+            ),
         ],
       ),
     );
