@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:myportfolio_mobile/widgets/section_card.dart';
 import 'package:myportfolio_mobile/widgets/section_page.dart';
 

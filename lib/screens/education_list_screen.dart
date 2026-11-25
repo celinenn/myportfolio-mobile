@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:myportfolio_mobile/models/education.dart';
 import 'package:myportfolio_mobile/screens/education_detail_screen.dart';
 import 'package:myportfolio_mobile/services/api_client.dart';
