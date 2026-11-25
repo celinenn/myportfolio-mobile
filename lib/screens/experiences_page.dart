@@ -12,8 +12,7 @@ class ExperiencesPage extends StatelessWidget {
       children: [
         SectionCard(
           title: 'VPIC of Visual Design Division in Open House Fasilkom 2026',
-          subtitle:
-              'Co-led a team of 13 people in designing and creating assets used in the Open House Fasilkom 2026 website, Instagram feed, etc.',
+          subtitle: 'Co-led a team of 13 people in designing and creating assets used in the Open House Fasilkom 2026 website, Instagram feed, etc.',
         ),
         // Add more
       ],
